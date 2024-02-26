@@ -26,7 +26,11 @@ export function StatusBar(){
                 
         }}>Log Out </button>
             <p>Cart</p>
-            <img alt='Cart' className='cart-button' src = 'Cart-icon.png'></img>
+            <img alt='Cart' className='cart-button' src = 'Cart-icon.png' 
+            onClick={(e: React.MouseEvent) =>{
+                navigate('../cart');
+            }
+            }></img>
         </span>
       </div>
     )

@@ -1,4 +1,3 @@
-import { ProdInterface, Product } from "./Product";
 import {CartProduct, CartProductProps} from "./CartProduct";
 
 interface ProductsProps{

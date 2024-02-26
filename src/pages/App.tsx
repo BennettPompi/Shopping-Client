@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
-import axios from 'axios';
 import { useState, createContext } from 'react';
-import { Products } from '../components/Products';
-import { createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
+import { createBrowserRouter, RouterProvider} from "react-router-dom";
 import { StorePage } from './StorePage';
 import { Login } from './Login';
 import { Register } from './Register';
+import { Cart } from './Cart';
 
 export const AppContext = createContext({user: "INVALID", setUserID: (id: string) => {}});
 
@@ -38,7 +37,12 @@ export function App() {
     {
         path: "register",
         element: <Register/>
+    },
+    {
+        path: "cart",
+        element: <Cart/>
     }
+
 ]);
   return (
     <div>

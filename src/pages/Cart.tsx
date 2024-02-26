@@ -1,27 +1,31 @@
 import axios from 'axios';
-import { useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { AppContext } from './App';
 import { CartProducts } from '../components/CartProducts';
-interface Item {
-    title: string;
-    imgLink: string;
-    quantity: number,
-    price: number
-}
-interface CartResponse{data: Item[]}
+import { CartProductProps } from '../components/CartProduct';
+import { StatusBar } from '../components/StatusBar';
+interface CartResponse{data: CartProductProps[]}
+export const CartContext = createContext({instance: axios.create({
+    baseURL: 'http://localhost:8000',
+    timeout: 1000
+}), cartSize:0, setCartSize: (newSize: number)=>{}});
 export function Cart() {
     const context = useContext(AppContext);
+    const [cartData, setCartData] = useState<CartProductProps[]>([]);
     const instance = axios.create({
         baseURL: 'http://localhost:8000',
         timeout: 1000
     });
-    const cartData = instance.post('/cart', {username: context.user})
+    instance.post('/getCart', {username: context.user})
     .then((response:CartResponse) => {
-        response.data;
+       setCartData(response.data)
     });
     return (
         <div>
-            <CartProducts cartData={cartData} />
+            <StatusBar />
+            <AppContext.Provider value={context}>
+            <CartProducts Products={cartData} />
+            </AppContext.Provider>
         </div>
     );
 }
