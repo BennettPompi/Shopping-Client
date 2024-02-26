@@ -31,7 +31,7 @@ export function Cart() {
         instance.post('/getCart', {username: context.user})
         .then((response:CartResponse) => {
             setCartData(response.data);
-        })}), [cartSize];
+        })}, [cartSize]);
     
     const buttonHandler = (myItem: CartProductProps)=> {
         const instance = axios.create({
