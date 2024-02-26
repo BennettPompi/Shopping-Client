@@ -22,6 +22,7 @@
   width: 7.5vh;
   font-size: 10px;
   margin: 2vh;
+  color: black;
 }
 .cart-lbl{
   font-size: 10px;
@@ -49,16 +50,41 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.App-body{
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  .Login{
+      top: 0%;
+      background-color: #282c34;
+      min-height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      background-size: cover;
+      align-items: center;
+      font-size: calc(10px + 2vmin);
+      color: white;
+  }
 
 .App-link {
   color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.register-popup{
+  font-size: 20px;
+  margin: 25px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.err-msg{
+  color: red;
+  font-size: 20px;
+  margin: 25px;
+  justify-content: left;
 }

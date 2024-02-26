@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import { useState, createContext } from 'react';
-import { Products } from './Products';
+import { Products } from '../components/Products';
 import { createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
 import { StorePage } from './StorePage';
 import { Login } from './Login';
@@ -41,9 +41,7 @@ export function App() {
     }
 ]);
   return (
-
-    <div className="App">
-      
+    <div>
       <RouterProvider router={myRouter}/>
     </div>
   );

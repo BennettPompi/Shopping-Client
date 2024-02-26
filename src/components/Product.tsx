@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { AppContext } from "./App";
+import { AppContext } from "../pages/App";
 
 export interface ProdInterface{
+    buttonText: string;
     key: number;
     id: number;
     title: string;
@@ -17,14 +18,12 @@ export const Product = (Props: ProdInterface)  =>{
     const title: string = Props.title;
     const context = useContext(AppContext);
     return(
-        <>
-            <div>
+            <div key={id}>
                 <img className="photo" src={imageLink} alt={title} />
                 <p>{title}</p>
                 <button className="add-to-cart" onClick={(e: React.MouseEvent)=> {
-                    
-                }}>{}</button>
+
+                }}>{Props.buttonText}</button>
             </div>
-        </>
     )
 }
