@@ -2,24 +2,50 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.photo {
+  height: 200px;
+  width: 200px;
+  margin: 25px;
+}
+.user-message{
+  font-size: 20px;
+  margin: 25px;
+  justify-content: left;
+}
+.cart-button {
+  height: 7.5vh;
+  width: 7.5vh;
+  font-size: 10px;
+  margin: 2vh;
+}
+.cart-lbl{
+  font-size: 10px;
+  justify-content: right;
+}
+.add-to-cart{
+  height: 5vh;
+  width: 10vh;
+  border-radius: 2px;
+}
+.cart-span{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  margin: 2vh;
+}
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  height: 15vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
