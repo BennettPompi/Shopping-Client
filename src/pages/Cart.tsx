@@ -1,13 +1,17 @@
 import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { AppContext } from './App';
-import { CartProducts } from '../components/CartProducts';
-import { CartProductProps } from '../components/CartProduct';
 import { StatusBar } from '../components/StatusBar';
 import { ProdResInterface } from '../components/Product';
 import { Products } from '../components/Products';
 interface CartResponse{data: ProdResInterface[]}
-
+interface CartProductProps{
+    id: number;
+    title: string;
+    imgLink: string;
+    quantity: number,
+    price: number
+}
 export function Cart() {
     const context = useContext(AppContext);
     const [cartData, setCartData]:Array<any> = useState(()=>{
@@ -17,7 +21,7 @@ export function Cart() {
         });
         instance.post('/getCart', {username: context.user})
         .then((response:CartResponse) => {
-            return response.data;
+            return Object.values(response.data);
         })});
 
     const [cartSize, setCartSize]: [number, any] = useState(cartData.length);
