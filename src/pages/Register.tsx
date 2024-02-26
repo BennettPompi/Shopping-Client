@@ -23,7 +23,7 @@ export const Register = () => {
             
         })
     }
-    return (<div className="App-body">
+    return (<div className="Login">
         <h1>Register</h1>
         <UserDataInput buttonText="Register" submitHandler={submitHandler} errorMsg={errMsg}/>
         {error && <p className='err-msg'>{errMsg}</p>}

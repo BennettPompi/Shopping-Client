@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { ProdInterface } from "../components/Product";
+import { ProdInterface, ProdResInterface } from "../components/Product";
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import { StatusBar } from '../components/StatusBar';
@@ -7,25 +7,42 @@ import { Products } from '../components/Products';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from './App';
 
-export const StoreContext = createContext({instance: axios.create({
-    baseURL: 'http://localhost:8000',
-    timeout: 1000
-}), cartSize:0, setCartSize: (newSize: number)=>{}})
+export const StoreContext = createContext((myItem: ProdInterface)=>{})
 export function StorePage(){
-    const [products, setProducts]: [ProdInterface[], any] = useState([]);
+    const [products, setProducts]: [ProdResInterface[], any] = useState([]);
     const [cartSize, setCartSize]: [number, any] = useState(0);
     const userID = useContext(AppContext).user;
     const serverInstance = axios.create({
         baseURL: 'http://localhost:8000',
         timeout: 1000
     });
+    const buttonHandler = (myItem: ProdInterface)=> {
+        serverInstance.post('/addToCart', {
+            username: userID,
+            item: {
+                id:myItem.id,
+                title: myItem.title,
+                imgLink: myItem.imageLink,
+                quantity: 1,
+                price: myItem.price
+        }}).then((response)=>{
+            if (response.status === 200){
+                setCartSize(cartSize+1);
+                console.log(response.data)
+            }
+            else{
+                console.log("error")
+            }
+        }
+    )
+    }
     const navigate = useNavigate();
     if (userID === "INVALID"){
         navigate('/');
     }
     try {
         axios.get('https://kith.com/products.json', { timeout: 500 })
-            .then((response: { data: { products: ProdInterface[]; }; }) => {
+            .then((response: { data: { products: ProdResInterface[]; }; }) => {
                 setProducts(response.data.products);
             }).catch((error: any) => { console.log(error); });
     }
@@ -36,8 +53,8 @@ export function StorePage(){
         <>
             <StatusBar />
             <div className="App-body">
-            <StoreContext.Provider value={{instance: serverInstance, cartSize:cartSize,setCartSize: setCartSize}}>
-            <Products Products={products} />
+            <StoreContext.Provider value={buttonHandler}>
+            <Products Products={products} buttonText='Add to Cart'/>
             </StoreContext.Provider>
             </div>
         </>
